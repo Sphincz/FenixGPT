@@ -1,14 +1,14 @@
-<h1 style="text-align:center">
+<h1 align="center">
   FénixGPT 🦖
 </h1>
 
-<p style="text-align:center">
+<p align="center">
   <strong>Open-Source Chatbot for ISCTE Sintra Student Course Registration</strong>
   <br/>
   <strong>Forked from DocsGPT</strong>
 </p>
 
-<div style="text-align:center">
+<div align="center">
 
   ![example3](https://img.shields.io/github/license/arc53/docsgpt)</a>
   
