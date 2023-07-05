@@ -1,4 +1,4 @@
-name: Build and push DocsGPT Docker image
+name: Build and push FenixGPT Docker image
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    if: github.repository == 'arc53/DocsGPT'
+    if: github.repository == 'Sphincz/FenixGPT'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -45,5 +45,5 @@ jobs:
           context: ./application
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/docsgpt:latest
-            ghcr.io/${{ github.repository_owner }}/docsgpt:latest
+            ${{ secrets.DOCKER_USERNAME }}/fenixgpt:latest
+            ghcr.io/${{ github.repository_owner }}/fenixgpt:latest
