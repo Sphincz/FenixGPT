@@ -169,12 +169,13 @@ def complete_stream(question, docsearch, chat_history, api_key):
         llm = AzureChatOpenAI(
             openai_api_key=api_key,
             openai_api_base=settings.OPENAI_API_BASE,
+            openai_organization=settings.ORGANIZATION_ID,
             openai_api_version=settings.OPENAI_API_VERSION,
             deployment_name=settings.AZURE_DEPLOYMENT_NAME,
         )
     else:
         logger.debug("plain OpenAI")
-        llm = ChatOpenAI(openai_api_key=api_key)
+        llm = ChatOpenAI(openai_api_key=api_key, openai_organization=settings.ORGANIZATION_ID)
     docs = docsearch.similarity_search(question, k=2)
     # join all page_content together with a newline
     docs_together = "\n".join([doc.page_content for doc in docs])
@@ -279,12 +280,14 @@ def api_answer():
                 llm = AzureChatOpenAI(
                     openai_api_key=api_key,
                     openai_api_base=settings.OPENAI_API_BASE,
+                    openai_organization=settings.ORGANIZATION_ID,
                     openai_api_version=settings.OPENAI_API_VERSION,
                     deployment_name=settings.AZURE_DEPLOYMENT_NAME,
                 )
             else:
                 logger.debug("plain OpenAI")
-                llm = ChatOpenAI(openai_api_key=api_key, model_name=gpt_model)  # optional parameter: model_name="gpt-4"
+                #llm = ChatOpenAI(openai_api_key=api_key, openai_organization=settings.ORGANIZATION_ID, model_name=gpt_model)  # optional parameter: model_name="gpt-4"
+                llm = ChatOpenAI(openai_api_key=api_key, openai_organization=settings.ORGANIZATION_ID, model_name='gpt-3.5-turbo')  # optional parameter: model_name="gpt-4"
             messages_combine = [SystemMessagePromptTemplate.from_template(chat_combine_template)]
             if history:
                 tokens_current_history = 0
