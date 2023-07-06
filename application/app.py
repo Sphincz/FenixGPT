@@ -286,8 +286,7 @@ def api_answer():
                 )
             else:
                 logger.debug("plain OpenAI")
-                #llm = ChatOpenAI(openai_api_key=api_key, openai_organization=settings.ORGANIZATION_ID, model_name=gpt_model)  # optional parameter: model_name="gpt-4"
-                llm = ChatOpenAI(openai_api_key=api_key, openai_organization=settings.ORGANIZATION_ID, model_name='gpt-3.5-turbo')  # optional parameter: model_name="gpt-4"
+                llm = ChatOpenAI(openai_api_key=api_key, openai_organization=settings.ORGANIZATION_ID, model_name=gpt_model)  # optional parameter: model_name="gpt-4"
             messages_combine = [SystemMessagePromptTemplate.from_template(chat_combine_template)]
             if history:
                 tokens_current_history = 0
