@@ -74,7 +74,7 @@ export default function Conversation() {
   return (
     <div className="flex justify-center p-4">
       {queries.length > 0 && (
-        <div className="mt-20 flex flex-col transition-all md:w-3/4">
+        <div className="mt-20 mb-20 flex flex-col transition-all md:w-3/4">
           {queries.map((query, index) => {
             return (
               <Fragment key={index}>
@@ -130,8 +130,9 @@ export default function Conversation() {
           )}
         </div>
         <p className="w-[100vw] self-center bg-white p-5 text-center text-xs text-gray-2000">
-          This is a chatbot that uses the GPT-3, Faiss and LangChain to answer
-          questions.
+          Este chatbot utiliza a versão mais recente do GPT-4, baseando-se em
+          documentação oficial fornecida pelo Iscte - Instituto Universitário de
+          Lisboa.
         </p>
       </div>
     </div>

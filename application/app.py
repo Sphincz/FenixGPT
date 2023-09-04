@@ -200,6 +200,8 @@ def complete_stream(question, docsearch, chat_history, api_key):
                     messages_combine.append({"role": "user", "content": i["prompt"]})
                     messages_combine.append({"role": "system", "content": i["response"]})
     messages_combine.append({"role": "user", "content": question})
+    # Domain-specific restriction
+    #messages_combine.append({"role": "user", "system": "If the context is not related to Iscte Sintra or Higher Education in general, answer 'I don't know'."})
     completion = openai.ChatCompletion.create(model=gpt_model, engine=settings.AZURE_DEPLOYMENT_NAME,
                                               messages=messages_combine, stream=True, max_tokens=500, temperature=0)
 

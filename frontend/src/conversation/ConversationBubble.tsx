@@ -7,6 +7,7 @@ import { ReactComponent as Dislike } from './../assets/dislike.svg';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import remarkGfm from 'remark-gfm';
 
 const DisableSourceFE = import.meta.env.VITE_DISABLE_SOURCE_FE || false;
 
@@ -71,6 +72,8 @@ const ConversationBubble = forwardRef<
             )}
             <ReactMarkdown
               className="whitespace-pre-wrap break-words"
+              remarkPlugins={[remarkGfm]}
+              linkTarget={'_blank'}
               components={{
                 code({ node, inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || '');
@@ -96,6 +99,9 @@ const ConversationBubble = forwardRef<
                 ol({ node, children }) {
                   return <List ordered>{children}</List>;
                 },
+                a: ({ node, ...props }) => (
+                  <a style={{ textDecoration: 'underline' }} {...props} />
+                ),
               }}
             >
               {message}
@@ -134,23 +140,25 @@ const ConversationBubble = forwardRef<
             ></Dislike>
           </div>
         </div>
-        <div className="ml-8 mt-2 grid w-1/2 grid-cols-3 gap-2">
-          {DisableSourceFE
-            ? null
-            : sources?.map((source, index) => (
-                <div
-                  key={index}
-                  className="w-26 cursor-pointer rounded-xl border border-gray-200 py-1 px-2 hover:bg-gray-100"
-                  onClick={() =>
-                    setOpenSource(openSource === index ? null : index)
-                  }
-                >
-                  <p className="truncate text-xs text-gray-500">
-                    {index + 1}. {source.title}
-                  </p>
-                </div>
-              ))}
-        </div>
+
+        {/* DISABLE SOURCE DOC INFORMATION IN CONVERSATION BUBBLE */}
+        {/*<div className="ml-8 mt-2 grid w-1/2 grid-cols-3 gap-2">*/}
+        {/*  {DisableSourceFE*/}
+        {/*    ? null*/}
+        {/*    : sources?.map((source, index) => (*/}
+        {/*        <div*/}
+        {/*          key={index}*/}
+        {/*          className="w-26 cursor-pointer rounded-xl border border-gray-200 py-1 px-2 hover:bg-gray-100"*/}
+        {/*          onClick={() =>*/}
+        {/*            setOpenSource(openSource === index ? null : index)*/}
+        {/*          }*/}
+        {/*        >*/}
+        {/*          <p className="truncate text-xs text-gray-500">*/}
+        {/*            {index + 1}. {source.title}*/}
+        {/*          </p>*/}
+        {/*        </div>*/}
+        {/*      ))}*/}
+        {/*</div>*/}
 
         {sources && openSource !== null && sources[openSource] && (
           <div className="ml-8 mt-2 w-3/4 rounded-xl bg-blue-200 p-2">

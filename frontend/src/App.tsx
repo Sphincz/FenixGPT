@@ -18,8 +18,13 @@ export default function App() {
     <div className="min-h-full min-w-full">
       <Navigation navState={navState} setNavState={setNavState} />
       <div
+        // className={`transition-all duration-200 ${
+        //   navState === 'ACTIVE' ? 'ml-0 md:ml-72 lg:ml-60' : 'ml-0 md:ml-16'
+        // }`}
+
+        // FIX CENTER CONVERSATION AFTER SIDE PANEL HIDING
         className={`transition-all duration-200 ${
-          navState === 'ACTIVE' ? 'ml-0 md:ml-72 lg:ml-60' : 'ml-0 md:ml-16'
+          navState === 'ACTIVE' ? 'ml-0' : 'ml-0'
         }`}
       >
         <Routes>
