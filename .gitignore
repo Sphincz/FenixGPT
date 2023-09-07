@@ -161,9 +161,9 @@ frontend/*.sw?
 
 application/vectors/
 
-#**/inputs
+**/inputs
 
-#**/indexes
+**/indexes
 
 **/temp
 

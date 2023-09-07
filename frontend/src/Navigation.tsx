@@ -83,7 +83,6 @@ export default function Navigation({
 
   return (
     <>
-      {/*HIDE NAV BAR / SIDE PANEL*/}
       {/*<div*/}
       {/*  ref={navRef}*/}
       {/*  className={`${*/}
