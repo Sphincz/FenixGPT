@@ -55,7 +55,7 @@ export default function Upload({
             setProgress(undefined);
             setModalState('INACTIVE');
           }}
-          className={`rounded-md bg-blue-3000 px-4 py-2 text-sm font-medium text-white ${
+          className={`rounded-3xl bg-blue-3000 px-4 py-2 text-sm font-medium text-white ${
             isCancellable ? '' : 'hidden'
           }`}
         >
@@ -162,6 +162,8 @@ export default function Upload({
       'text/x-rst': ['.rst'],
       'text/x-markdown': ['.md'],
       'application/zip': ['.zip'],
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        ['.docx'],
     },
   });
 
@@ -175,7 +177,7 @@ export default function Upload({
       <>
         <p className="text-xl text-jet">Upload New Documentation</p>
         <p className="mb-3 text-xs text-gray-4000">
-          Please upload .pdf, .txt, .rst, .md, .zip limited to 25mb
+          Please upload .pdf, .txt, .rst, .docx, .md, .zip limited to 25mb
         </p>
         <input
           type="text"
@@ -187,7 +189,7 @@ export default function Upload({
           <span className="bg-white px-2 text-xs text-gray-4000">Name</span>
         </div>
         <div {...getRootProps()}>
-          <span className="rounded-md border border-blue-2000 px-4 py-2 font-medium text-blue-2000 hover:cursor-pointer">
+          <span className="rounded-3xl border border-blue-2000 px-4 py-2 font-medium text-blue-2000 hover:cursor-pointer">
             <input type="button" {...getInputProps()} />
             Choose Files
           </span>
@@ -204,7 +206,7 @@ export default function Upload({
         <div className="flex flex-row-reverse">
           <button
             onClick={uploadFile}
-            className="ml-6 rounded-md bg-blue-3000 py-2 px-6 text-white"
+            className="ml-6 rounded-3xl bg-blue-3000 py-2 px-6 text-white"
           >
             Train
           </button>

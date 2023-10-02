@@ -3,7 +3,7 @@ from math import ceil
 from typing import List
 
 import tiktoken
-from parser.schema.base import Document
+from application.parser.schema.base import Document
 
 
 def separate_header_and_body(text):
@@ -25,7 +25,7 @@ def group_documents(documents: List[Document], min_tokens: int, max_tokens: int)
             current_group = Document(text=doc.text, doc_id=doc.doc_id, embedding=doc.embedding,
                                      extra_info=doc.extra_info)
         elif len(tiktoken.get_encoding("cl100k_base").encode(
-                current_group.text)) + doc_len < max_tokens and doc_len >= min_tokens:
+                current_group.text)) + doc_len < max_tokens and doc_len < min_tokens:
             current_group.text += " " + doc.text
         else:
             docs.append(current_group)
@@ -46,6 +46,9 @@ def split_documents(documents: List[Document], max_tokens: int) -> List[Document
             docs.append(doc)
         else:
             header, body = separate_header_and_body(doc.text)
+            if len(tiktoken.get_encoding("cl100k_base").encode(header)) > max_tokens:
+                body = doc.text
+                header = ""
             num_body_parts = ceil(token_length / max_tokens)
             part_length = ceil(len(body) / num_body_parts)
             body_parts = [body[i:i + part_length] for i in range(0, len(body), part_length)]

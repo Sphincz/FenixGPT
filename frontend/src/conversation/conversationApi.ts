@@ -8,7 +8,24 @@ export function fetchAnswerApi(
   apiKey: string,
   selectedDocs: Doc,
   history: Array<any> = [],
-): Promise<Answer> {
+  conversationId: string | null,
+): Promise<
+  | {
+      result: any;
+      answer: any;
+      sources: any;
+      conversationId: any;
+      query: string;
+    }
+  | {
+      result: any;
+      answer: any;
+      sources: any;
+      query: string;
+      conversationId: any;
+      title: any;
+    }
+> {
   let namePath = selectedDocs.name;
   if (selectedDocs.language === namePath) {
     namePath = '.project';
@@ -44,6 +61,7 @@ export function fetchAnswerApi(
       embeddings_key: apiKey,
       history: history,
       active_docs: docPath,
+      conversation_id: conversationId,
     }),
   })
     .then((response) => {
@@ -55,7 +73,13 @@ export function fetchAnswerApi(
     })
     .then((data) => {
       const result = data.answer;
-      return { answer: result, query: question, result, sources: data.sources };
+      return {
+        answer: result,
+        query: question,
+        result,
+        sources: data.sources,
+        conversationId: data.conversation_id,
+      };
     });
 }
 
@@ -64,6 +88,7 @@ export function fetchAnswerSteaming(
   apiKey: string,
   selectedDocs: Doc,
   history: Array<any> = [],
+  conversationId: string | null,
   onEvent: (event: MessageEvent) => void,
 ): Promise<Answer> {
   let namePath = selectedDocs.name;
@@ -97,6 +122,7 @@ export function fetchAnswerSteaming(
       embeddings_key: apiKey,
       active_docs: docPath,
       history: JSON.stringify(history),
+      conversation_id: conversationId,
     };
 
     fetch(apiHost + '/stream', {

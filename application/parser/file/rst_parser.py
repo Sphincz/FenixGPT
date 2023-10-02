@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-from parser.file.base_parser import BaseParser
+from application.parser.file.base_parser import BaseParser
 
 
 class RstParser(BaseParser):
@@ -27,7 +27,7 @@ class RstParser(BaseParser):
             remove_interpreters: bool = True,
             remove_directives: bool = True,
             remove_whitespaces_excess: bool = True,
-            # Be carefull with remove_characters_excess, might cause data loss
+            # Be careful with remove_characters_excess, might cause data loss
             remove_characters_excess: bool = True,
             **kwargs: Any,
     ) -> None:
