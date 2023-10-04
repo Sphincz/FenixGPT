@@ -1,17 +1,13 @@
 import platform
 
-
 import dotenv
 from application.celery import celery
 from flask import Flask, request, redirect
-
 
 from application.core.settings import settings
 from application.api.user.routes import user
 from application.api.answer.routes import answer
 from application.api.internal.routes import internal
-
-
 
 # Redirect PosixPath to WindowsPath on Windows
 
@@ -24,8 +20,6 @@ if platform.system() == "Windows":
 # loading the .env file
 dotenv.load_dotenv()
 
-
-
 app = Flask(__name__)
 app.register_blueprint(user)
 app.register_blueprint(answer)
@@ -35,7 +29,6 @@ app.config["CELERY_BROKER_URL"] = settings.CELERY_BROKER_URL
 app.config["CELERY_RESULT_BACKEND"] = settings.CELERY_RESULT_BACKEND
 app.config["MONGO_URI"] = settings.MONGO_URI
 celery.config_from_object("application.celeryconfig")
-
 
 
 @app.route("/")
@@ -50,8 +43,6 @@ def home():
     else:
         # Handle other cases or render the default page
         return 'Welcome to DocsGPT Backend!'
-
-
 
 
 # handling CORS
