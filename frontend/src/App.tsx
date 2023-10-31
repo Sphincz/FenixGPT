@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Conversation from './conversation/Conversation';
 import About from './About';
-//import Navigation from './Navigation';
+import Navigation from './Navigation';
 import { useEffect, useState } from 'react';
 import { ActiveState } from './models/misc';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +40,7 @@ export default function App() {
   return (
     <div className="min-h-full min-w-full">
       {/*HIDE NAVIGATION*/}
-      {/*<Navigation navState={navState} setNavState={setNavState} />*/}
+      <Navigation navState={navState} setNavState={setNavState} />
       <div
         // className={`transition-all duration-200 ${
         //   navState === 'ACTIVE' ? 'ml-0 md:ml-72 lg:ml-60' : 'ml-0 md:ml-16'
