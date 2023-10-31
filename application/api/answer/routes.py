@@ -30,7 +30,8 @@ answer = Blueprint('answer', __name__)
 if settings.LLM_NAME == "gpt4":
     gpt_model = 'gpt-4'
 else:
-    gpt_model = 'gpt-3.5-turbo'
+    #gpt_model = 'gpt-3.5-turbo'
+    gpt_model = 'gpt-4'
 
 # load the prompts
 current_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
